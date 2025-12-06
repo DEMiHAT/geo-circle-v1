@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "439011790532",
+    "project_id": "geocircle-attendance",
+    "storage_bucket": "geocircle-attendance.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439011790532:android:42f7d2a3c7732e60498391",
+        "android_client_info": {
+          "package_name": "com.example.geocirclev1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-mrWZjaskoV22v-1HOTMHqtrBnNBwQz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
