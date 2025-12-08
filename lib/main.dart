@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/student_home.dart';
 import 'screens/faculty_home.dart';
-import 'screens/splash_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(const GeoCircleApp());
 }
 
@@ -26,11 +26,11 @@ class GeoCircleApp extends StatelessWidget {
         useMaterial3: true,
       ),
 
-      // FIRST SCREEN = LOGIN
-      initialRoute: "/login",
+      // 👇 SHOW SPLASH FIRST
+      initialRoute: "/splash",
 
       routes: {
-        "/": (context) => const SplashScreen(),
+        "/splash": (context) => const SplashScreen(),
         "/login": (context) => const LoginScreen(),
         "/signup": (context) => const SignupScreen(),
         "/student": (context) => const StudentHomeScreen(),

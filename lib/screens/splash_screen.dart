@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,65 +8,31 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
-    startCheck();
+    _goNext();
   }
 
-  Future<void> startCheck() async {
-    await Future.delayed(const Duration(seconds: 2)); // splash duration
+  Future<void> _goNext() async {
+    print("SPLASH: Started...");
 
-    final user = FirebaseAuth.instance.currentUser;
+    await Future.delayed(const Duration(seconds: 2));
 
-    if (user == null) {
-      // Not logged in → login screen
-      Navigator.pushReplacementNamed(context, "/login");
-      return;
-    }
+    if (!mounted) return;
 
-    // logged in → fetch role
-    final doc = await FirebaseFirestore.instance
-        .collection("users")
-        .doc(user.uid)
-        .get();
+    print("SPLASH: Navigating to login");
 
-    if (!doc.exists || !doc.data()!.containsKey("role")) {
-      Navigator.pushReplacementNamed(context, "/login");
-      return;
-    }
-
-    final role = doc["role"];
-
-    if (role == "faculty") {
-      Navigator.pushReplacementNamed(context, "/facultyHome");
-    } else if (role == "student") {
-      Navigator.pushReplacementNamed(context, "/studentHome");
-    } else if (role == "admin") {
-      Navigator.pushReplacementNamed(context, "/adminHome");
-    } else {
-      Navigator.pushReplacementNamed(context, "/login");
-    }
+    Navigator.pushReplacementNamed(context, "/login");
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.location_on, size: 90, color: Colors.blueAccent),
-            const SizedBox(height: 15),
-            const Text("GeoCircle",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 5),
-            const Text("Smart Geofence Attendance",
-                style: TextStyle(fontSize: 16, color: Colors.grey)),
-            const SizedBox(height: 30),
-            const CircularProgressIndicator(),
-          ],
+        child: Text(
+          "GeoCircle",
+          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
         ),
       ),
     );
